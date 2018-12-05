@@ -1,0 +1,153 @@
+#include<stdio.h>//include header files
+
+#include<conio.h>
+
+int a[30],m,elecount,size;//DECLARE GLOBAL VARIBALE
+
+int main() //main program
+
+{
+
+int ele,i,ch; //declare local varibales
+
+void insert(int); // declare insert function
+
+void search(int); //declare search function
+
+printf("enter value of m it is in between 16 and 32 and it must be a prime number\n");
+
+scanf("%d",&m); //read m value
+
+printf("enter no of array elements it must be less than 30\n");
+
+scanf("%d",&size); //read number of elements
+
+do
+
+{
+
+printf("\nMENU\n1. INSERT \n2. SEARCH\n3. DISPLAY\n 4.EXIT \n"); //display the menu
+
+printf("enter one choice\n");
+
+scanf("%d",&ch); //select your option
+
+switch(ch) //switch sataement to select your option
+
+{
+
+case 1: for(i=0;i<size;i++) //repeat loop for number of elements time
+
+{
+
+printf("enter element to be insert\n"); //read element
+
+scanf("%d",&ele); //insert at appropriate position through function call
+
+insert(ele);
+
+}
+
+break;
+
+case 2: printf("enter element to search\n"); // identfy search element
+
+scanf("%d",&ele);
+
+search(ele); //search element in the function
+
+break;
+
+case 3: printf("Hash table data is \n"); //display hash table data
+
+for(i=0;i<30;i++)
+
+{
+
+if(a[i]!=0)
+
+printf("%d = %d\n",i,a[i]);
+
+}
+
+break;
+
+}
+
+}while(ch!=4);//exit from menu and main program
+
+}
+
+void search(int key) //search function defination
+
+{
+
+int pos,flag=0,count=0; //count is to count no of elements
+
+if(elecount==0) //represents no of elements in the array
+
+printf("There is no elements in the hashtable");
+
+else
+
+{
+
+pos=key%m; //indentify the pos using division method
+
+while((a[pos]!=key)&&(count!=size)) //repeat loop until identify the position and end of the table
+
+{
+
+pos=(pos+1)%m; //indentify the pos using division lenear probing method
+
+count++;
+
+}
+
+if(a[pos]==key) //elment found case
+
+{
+
+printf("element found at loc %d ",pos);
+
+flag=1;
+
+}
+
+if(flag==0) //elment not found case
+
+printf("element not found");
+
+}
+
+}
+
+void insert(int key) //defination to insert element
+
+{
+
+int pos; //check hash table full condition
+
+if(elecount==30)
+
+{
+
+printf("array is full");
+
+}
+
+else
+
+{
+
+pos = key % m; //indentify the pos using division method
+
+while(a[pos]!=0)
+
+pos=(pos+1)%m;//indentify the pos using division lenear probing method
+
+a[pos]=key;   
+
+elecount++;
+
+}
